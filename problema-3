@@ -1,0 +1,40 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+void citire(int& n, int a[])
+{
+	cin >> n;
+	for (int i = 0; i < n-1; i++)
+	{
+		cin >> a[i];
+	}
+}
+
+int DAC(int low, int high, int a[], int& s)
+{
+	if (low <= high)
+	{
+		int pivot = (low + high)/2;
+		s += DAC(low, pivot - 1, a, s);
+		s += DAC(pivot+1, high, a, s);
+		return a[pivot];
+	}
+	return 0;
+}
+
+int gasireNumar(int a[], int n)
+{
+	int s = (n-2)/2;
+	DAC(0, n - 2, a, s);
+	cout << s << endl;
+	return ((n-1) * n) / 2 - s;
+}
+
+int main() {
+	int a[100], n;
+	citire(n, a);
+	cout << gasireNumar(a, n);
+	return 0;
+}
