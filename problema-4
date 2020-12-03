@@ -1,0 +1,37 @@
+#include <iostream>
+
+using namespace std;
+
+void citire(int& n, int a[])
+{
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> a[i];
+	}
+}
+
+int binarySearch(int low, int high, int a[])
+{
+	if (low <= high)
+	{
+		int pivot = (low + high) / 2;
+		if (a[pivot] > pivot)
+		{
+			binarySearch(low, pivot - 1, a);
+			binarySearch(pivot + 1, high, a);
+		}
+		if (a[pivot] == pivot)
+		{
+			return pivot;
+		}
+	}
+	return -1;
+}
+
+int main() {
+	int a[100], n;
+	citire(n, a);
+	cout<<binarySearch(0, n - 1, a);
+	return 0;
+}
